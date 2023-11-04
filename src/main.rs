@@ -17,7 +17,7 @@ use foundry_evm_mini::evm::executor::{
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let wss_url = "ws://localhost:8546";
+    let wss_url = "wss://eth-mainnet.g.alchemy.com/v2/ainc64D6aQZ6i7QwDkYqUkSVj754iwGz";
     let ws = Ws::connect(wss_url).await.unwrap();
     let provider = Arc::new(Provider::new(ws));
 

@@ -37,7 +37,7 @@ revm = { version = "3", default-features = false, features = [
 foundry-evm-mini = { git = "https://github.com/solidquant/foundry-evm-mini.git" }
 
 [patch.crates-io]
-revm = { git = "https://github.com/bluealloy/revm/", rev = "6b55b9c0ab264c000e087c2f54f2d8dc24b869aa" }
+revm = { git = "https://github.com/bluealloy/revm/", rev = "80c909d6f242886cb26e6103a01d1a4bf9468426" }
 ```
 
-Make sure **revm** version is patched to the commit at: 6b55b9c0ab264c000e087c2f54f2d8dc24b869aa.
+Make sure **revm** version is patched to the commit at: 80c909d6f242886cb26e6103a01d1a4bf9468426 (v3.4)
