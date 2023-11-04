@@ -1,4 +1,4 @@
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use ethers::abi::parse_abi;
 use ethers::providers::{Middleware, Provider, Ws};
 use ethers::types::{BlockNumber, H160};
@@ -10,7 +10,10 @@ use revm::{
 };
 use std::{collections::BTreeSet, str::FromStr, sync::Arc};
 
-use foundry_evm_mini::evm::executor::fork::{BlockchainDb, BlockchainDbMeta, SharedBackend};
+use foundry_evm_mini::evm::executor::{
+    fork::{BlockchainDb, BlockchainDbMeta, SharedBackend},
+    inspector::{get_precompiles_for, AccessListTracer},
+};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -82,6 +85,18 @@ async fn main() -> Result<()> {
         },
         _ => {}
     };
+
+    // get access list example
+    let mut access_list_inspector = AccessListTracer::new(
+        Default::default(),
+        evm.env.tx.caller.into(),
+        factory,
+        get_precompiles_for(evm.env.cfg.spec_id),
+    );
+    evm.inspect_ref(&mut access_list_inspector)
+        .map_err(|e| anyhow!("[EVM ERROR] access list: {:?}", (e)))?;
+    let access_list = access_list_inspector.access_list();
+    println!("{:?}", access_list);
 
     Ok(())
 }
