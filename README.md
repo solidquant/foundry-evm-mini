@@ -12,6 +12,10 @@ Currently supports:
 - BlockchainDB (evm/executor/fork)
 - BlockchainDBMeta (evm/executor/fork)
 
+Updated (2023.11.04):
+
+- AccessListTracer (evm/executor/inspector)
+
 ---
 
 * How to use?
